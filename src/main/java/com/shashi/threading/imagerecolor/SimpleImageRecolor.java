@@ -5,11 +5,11 @@ import java.io.IOException;
 
 public class SimpleImageRecolor {
 
-    public static void changePixelColor(BufferedImage srcImg, BufferedImage destImg, int w, int h)
-            throws IOException {
+    public static void changePixelColor(BufferedImage srcImg, BufferedImage destImg, int w, int h,
+            int x, int y) throws IOException {
 
-        for (int i = 0; i < w; i++) {
-            for (int j = 0; j < h; j++) {
+        for (int i = x; i < w + x; i++) {
+            for (int j = y; j < h + y; j++) {
                 int rgb = srcImg.getRGB(i, j);
                 if (isShadeOfGray(rgb)) {
                     setPixelRgb(destImg, i, j, 0xFF0000FF);
@@ -20,12 +20,17 @@ public class SimpleImageRecolor {
         }
     }
 
-    private static void setPixelRgb(BufferedImage destImg, int i, int j, int rgb) {
+    public static void createNewImage(BufferedImage srcImg, BufferedImage destImg, int w, int h)
+            throws IOException {
+        changePixelColor(srcImg, destImg, w, h, 0, 0);
+    }
+
+    public static void setPixelRgb(BufferedImage destImg, int i, int j, int rgb) {
         destImg.getRaster().setDataElements(i, j,
                 destImg.getColorModel().getDataElements(rgb, null));
     }
 
-    private static boolean isShadeOfGray(int rgb) {
+    public static boolean isShadeOfGray(int rgb) {
         int b = getColorBlue(rgb);
         int g = getColorGrean(rgb);
         int r = getColorRed(rgb);

@@ -13,8 +13,10 @@ public class ImageRecolorApplication {
 	public static final String SOURCE_FILE =
 			"/C:/Users/shash/code/corejava/image-recolor/src/main/resources/flower.jpg";
 
-	public static final String DEST_FILE =
+	public static final String DEST_FILE_SINGLE_THREAD =
 			"/C:/Users/shash/code/corejava/image-recolor/src/main/resources/changed-color-flower.jpg";
+	public static final String DEST_FILE_MULTI_THREAD =
+			"/C:/Users/shash/code/corejava/image-recolor/src/main/resources/changed-color-flower-multi.jpg";
 
 	public static void main(String[] args) throws IOException {
 		SpringApplication.run(ImageRecolorApplication.class, args);
@@ -26,9 +28,16 @@ public class ImageRecolorApplication {
 		int h = srcImg.getHeight();
 		BufferedImage destImg = new BufferedImage(w, h, BufferedImage.TYPE_INT_RGB);
 
-		SimpleImageRecolor.changePixelColor(srcImg, destImg, w, h);
-
-		ImageIO.write(destImg, "jpg", new File(DEST_FILE));
+		long start2 = System.currentTimeMillis();
+		MultiThreadedRecolor.multiThreadedImage(srcImg, destImg, w, h, 0, 0, 8);
+		long end2 = System.currentTimeMillis();
+		System.out.println("multi thread processing time: " + (end2 - start2));
+		ImageIO.write(destImg, "jpg", new File(DEST_FILE_MULTI_THREAD));
+		long start1 = System.currentTimeMillis();
+		SimpleImageRecolor.changePixelColor(srcImg, destImg, w, h, 0, 0);
+		long end1 = System.currentTimeMillis();
+		System.out.println("single thread processing time: " + (end1 - start1));
+		ImageIO.write(destImg, "jpg", new File(DEST_FILE_SINGLE_THREAD));
 	}
 
 }
