@@ -11,12 +11,12 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 public class ImageRecolorApplication {
 
 	public static final String SOURCE_FILE =
-			"/C:/Users/shash/code/corejava/threading/image-recolor/src/main/resources/flower.jpg";
+			"/C:/Users/shash/code/corejava/threading/image-recolor-latency/src/main/resources/flower.jpg";
 
 	public static final String DEST_FILE_SINGLE_THREAD =
-			"/C:/Users/shash/code/corejava/threading/image-recolor/src/main/resources/changed-color-flower.jpg";
+			"/C:/Users/shash/code/corejava/threading/image-recolor-latency/src/main/resources/changed-color-flower.jpg";
 	public static final String DEST_FILE_MULTI_THREAD =
-			"/C:/Users/shash/code/corejava/threading/image-recolor/src/main/resources/changed-color-flower-multi.jpg";
+			"/C:/Users/shash/code/corejava/threading/image-recolor-latency/src/main/resources/changed-color-flower-multi.jpg";
 
 	public static void main(String[] args) throws IOException {
 		SpringApplication.run(ImageRecolorApplication.class, args);
